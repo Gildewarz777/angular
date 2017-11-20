@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="headline">
+    <h1 class="logo">
+              <div class="logo"></div>
+              Pimp my Pizza
+              <small>Cooked with love</small>
+            </h1>
+  </div>
+  <div *ngIf="showMeMain" class="row typography-row main">
+
+    <div class="type pizza-type">
+      <span class="text-note">Recette</span>
+      <label mouseHoverDesc *ngFor="let pizza of pizzas">
+        <input type="radio" name="type" value={{pizza.name.toLowerCase()}} data-toggle="radio" id="{{pizza.prix.toString()}}">
+        {{pizza.name}} ({{pizza.prix}}€)
+        <span class="description no-display">{{pizza.ingredients}}</span>
+      </label>
+    </div>
+
+    <div class="type nb-parts">
+      <span class="text-note">Nombre de parts</span>
+      <nb-part></nb-part> 
+
+    </div>
+
+    <div class="type">
+      <span class="text-note">Pâte</span>
+      <label *ngFor="let pate of pates"><input type="radio" name="pate" data-toggle="radio" id="{{pate.prix.toString()}}">{{pate.name}} (+{{pate.prix.toString()}}€)</label>
+    </div>
+
+    <div class="type">
+      <span class="text-note">Extras</span>
+      <label *ngFor="let extra of extras"><input name="extra" type="checkbox" id="{{extra.prix.toString()}}" data-toggle="checkbox">{{extra.name}} (+{{extra.prix.toString()}}€)</label>
+    </div>
+
+    <div *ngIf="showMeInfos" class="infos-client">
+      <div class="type">
+        <span class="text-note">Prénom</span>
+        <input #nom (keyup)="update(nom.value)" type="text" />
+      </div>
+      <div class="type">
+        <span class="text-note">Adresse</span>
+        <input type="text" />
+      </div>
+      <div class="type">
+        <span class="text-note">Code Postal</span>
+        <input type="number" />
+      </div>
+      <br />
+      <button (click)="hideMain()" class="btn btn-success done">Allez hop, j'ai très faim !</button>
+    </div>
+    <p><small>Les prix sont affichés pour 1 pizza entière.</small></p>
+    <button (click)="displayForm()" class="btn btn-success next-step">Etape suivante</button>
+  </div>
+  <div *ngIf="!showMeMain">
+    <p>Merci {{nom}} ! Votre commande sera livrée dans 15 minutes</p>
+  </div>
+</div>
+<!-- /.container -->
+
+<div class="stick-right">
+  <div class="tile">
+    <img src="assets/images/icons/svg/paper-bag.svg" class="tile-image big-illustration">
+    <h3 class="tile-title">Total</h3>
+    <p>0 €</p>
+    <a class="btn btn-primary btn-large btn-block" href="#">Payer</a>
+  </div>
+</div>
